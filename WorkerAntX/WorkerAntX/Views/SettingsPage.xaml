@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkerAntX.Views.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#666666" Padding="20">
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" >
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <!--Recovery Progress Smart-->
+                    <StackLayout>
+                        <!--Recovery-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Recovery" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                <Label Text="Mins" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                <Label Text="Mins" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <!--Progress-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Progress" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                <Label Text="Mins" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                <Label Text="Mins" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <!--Smart-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Smart" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                            <Label Text="Mins" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                            <Label Text="Mins" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <Button Text="Default" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="CenterAndExpand">
+                        <Button Text="Save" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

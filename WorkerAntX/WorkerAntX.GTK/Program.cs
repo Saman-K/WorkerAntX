@@ -9,6 +9,7 @@ namespace WorkerAntX.GTK
         [STAThread]
         public static void Main(string[] args)
         {
+            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
             Gtk.Application.Init();
             Forms.Init();
 

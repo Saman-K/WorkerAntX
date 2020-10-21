@@ -3,22 +3,153 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkerAntX.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
 
+    <StackLayout BackgroundColor="#666666" Padding="5">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Label HorizontalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Settings"  TextDecorations="Underline" TextColor="White">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="BtnSettings_ClickAsync"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Image Source="Plus_666666.png" HorizontalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnSettings_ClickAsync"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Label HorizontalOptions="End">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="About"  TextDecorations="Underline" TextColor="White">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="BtnAbout_ClickAsync"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Image Source="Plus_666666.png" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnAbout_ClickAsync"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+        
+        
+        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <Label Text="TimerTike" FontSize="Title" HorizontalOptions="Center" />
+            </StackLayout>
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" >
+                <ProgressBar HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="10">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <!--Recovery Progress-->
+                        <StackLayout>
+                            <!--Recovery-->
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <RadioButton GroupName="LapPackageNames"/>
+                                    <Label Text="Recovery" VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Work:" HorizontalOptions="Center"/>
+                                    <Label Text="40 min" HorizontalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Break:" HorizontalOptions="Center"/>
+                                    <Label Text="5 min" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <!--Progress-->
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <RadioButton GroupName="LapPackageNames"/>
+                                    <Label Text="Progress" VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Work:" HorizontalOptions="Center"/>
+                                    <Label Text="40 min" HorizontalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="Break:" HorizontalOptions="Center"/>
+                                    <Label Text="5 min" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
+                        <!--Smart Manual-->
+                        <StackLayout>
+                            <!--Smart-->
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton GroupName="LapPackageNames"/>
+                                <Label Text="Smart" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Work:" HorizontalOptions="Center"/>
+                                <Label Text="40 min" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Break:" HorizontalOptions="Center"/>
+                                <Label Text="5 min" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout >
+                            <!--Manual-->
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton GroupName="LapPackageNames"/>
+                                <Label Text="Manual" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Padding="0, 0, 30, 0">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                    <Label Text="Mins" VerticalOptions="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                    <Label Text="Mins" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="30">
+                    <Label Text="Laps:" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="1" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Button Text="Set" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Button Text="Start" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
