@@ -47,7 +47,9 @@
         
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <StackLayout>
-                <Label Text="TimerTike" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="labelWorkTimeCountdown" Text="WorkTimerTike" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="labelBreakTimeCountdown" Text="BreakTimerTike" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="labelLapCountdown" Text="LapsLeft" FontSize="Title" HorizontalOptions="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" >
                 <ProgressBar HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
@@ -55,99 +57,95 @@
 
             <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
                 <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="10">
+                    <!--Recovery Progress-->
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <!--Recovery Progress-->
-                        <StackLayout>
-                            <!--Recovery-->
-                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                <StackLayout Orientation="Horizontal">
-                                    <RadioButton GroupName="LapPackageNames"/>
-                                    <Label Text="Recovery" VerticalOptions="Center"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="Work:" HorizontalOptions="Center"/>
-                                    <Label Text="40 min" HorizontalOptions="Center"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="Break:" HorizontalOptions="Center"/>
-                                    <Label Text="5 min" HorizontalOptions="Center"/>
-                                </StackLayout>
+                        <!--Recovery-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton x:Name="radioBtnRecovery" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
+                                <Label Text="Recovery" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Work:" HorizontalOptions="Center"/>
+                                <Label x:Name="labelRecoveryWorkTimePreview" Text="0.00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Break:" HorizontalOptions="Center"/>
+                                <Label x:Name="labelRecoveryBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                             </StackLayout>
                         </StackLayout>
 
-                        <StackLayout>
-                            <!--Progress-->
-                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                                <StackLayout Orientation="Horizontal">
-                                    <RadioButton GroupName="LapPackageNames"/>
-                                    <Label Text="Progress" VerticalOptions="Center"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="Work:" HorizontalOptions="Center"/>
-                                    <Label Text="40 min" HorizontalOptions="Center"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="Break:" HorizontalOptions="Center"/>
-                                    <Label Text="5 min" HorizontalOptions="Center"/>
-                                </StackLayout>
+                        <!--Progress-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton x:Name="radioBtnProgress" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
+                                <Label Text="Progress" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Work:" HorizontalOptions="Center"/>
+                                <Label x:Name="labelProgressWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label Text="Break:" HorizontalOptions="Center"/>
+                                <Label x:Name="labelProgressBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                             </StackLayout>
                         </StackLayout>
 
                     </StackLayout>
-
+                    <!--Smart Manual-->
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
-                        <!--Smart Manual-->
-                        <StackLayout>
-                            <!--Smart-->
+                        <!--Smart-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton GroupName="LapPackageNames"/>
+                                <RadioButton x:Name="radioBtnSmart" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
                                 <Label Text="Smart" VerticalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center"/>
-                                <Label Text="40 min" HorizontalOptions="Center"/>
+                                <Label x:Name="labelSmartBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center"/>
-                                <Label Text="5 min" HorizontalOptions="Center"/>
+                                <Label x:Name="labelSmartWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
                             </StackLayout>
                         </StackLayout>
-
-                        <StackLayout >
-                            <!--Manual-->
+                        
+                        <!--Manual-->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton GroupName="LapPackageNames"/>
+                                <RadioButton x:Name="radioBtnManual" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
                                 <Label Text="Manual" VerticalOptions="Center"/>
                             </StackLayout>
-
                             <StackLayout Padding="0, 0, 30, 0">
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                    <Entry x:Name="labelManualWorkTimeSeter" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
                                     <Label Text="Mins" VerticalOptions="Center"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                                    <Entry x:Name="labelManualBreakTimeSeter" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="2" HorizontalOptions="FillAndExpand" FontSize="Small"/>
                                     <Label Text="Mins" VerticalOptions="Center"/>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
+                        
                     </StackLayout>
+                    
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="30">
                     <Label Text="Laps:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Entry Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="1" HorizontalOptions="FillAndExpand" FontSize="Small"/>
+                    <Entry x:Name="lapSeter" Keyboard="Numeric" ClearButtonVisibility="WhileEditing" MaxLength="1" HorizontalOptions="FillAndExpand" FontSize="Small"/>
                 </StackLayout>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Button Text="Set" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Clicked="SetBtn" Text="Set" HorizontalOptions="FillAndExpand"></Button>
                 </StackLayout>
                 <StackLayout HorizontalOptions="CenterAndExpand">
-                    <Button Text="Start" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Clicked="StartStopBtn" Text="Start" HorizontalOptions="FillAndExpand"></Button>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

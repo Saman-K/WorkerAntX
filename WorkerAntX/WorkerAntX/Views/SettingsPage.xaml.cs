@@ -16,5 +16,19 @@ namespace WorkerAntX.Views
         {
             InitializeComponent();
         }
+
+        #region Methods
+        //------------------------------------------------------------------------- Button
+        // Default Button
+        private void DefaultBtn(object sender, EventArgs e)
+        {
+
+        }
+        // Save Button
+        private void SaveBtn(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

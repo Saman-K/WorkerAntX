@@ -66,10 +66,10 @@
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Button Text="Default" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Clicked="DefaultBtn" Text="Default" HorizontalOptions="FillAndExpand"></Button>
                     </StackLayout>
                     <StackLayout HorizontalOptions="CenterAndExpand">
-                        <Button Text="Save" HorizontalOptions="FillAndExpand"></Button>
+                        <Button Clicked="SaveBtn" Text="Save" HorizontalOptions="FillAndExpand" ></Button>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
