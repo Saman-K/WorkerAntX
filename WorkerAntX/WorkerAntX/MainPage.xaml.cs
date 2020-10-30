@@ -9,6 +9,36 @@ namespace WorkerAntX
         public MainPage()
         {
             InitializeComponent();
+
+            if (Settings.LastUsedLapPackage == (int)LapPackageNames.Manual)
+            {
+                RadioBtnManual.IsChecked = true;
+            }
+            else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Recovery)
+            {
+                RadioBtnRecovery.IsChecked = true;
+            }
+            else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Smart)
+            {
+                RadioBtnSmart.IsChecked = true;
+            }
+            else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Progress)
+            {
+                RadioBtnProgress.IsChecked = true;
+            }
+            else
+            {
+                // error "Radio Button not found!"
+                RadioBtnSmart.IsChecked = true;
+            }
+
+            ((labelRecoveryWorkTimePreview.Text, labelRecoveryBreakTimePreview.Text), (labelSmartWorkTimePreview.Text, labelSmartBreakTimePreview.Text), (labelProgressWorkTimePreview.Text,
+                labelProgressBreakTimePreview.Text), (LabelManualWorkTimePreview.Text, LabelManualBreakTimePreview.Text), LapCounter.Text) = Settings.GetSattingsLapPackages();
+
+            LapCounterStepper.Value = Settings.LapCounter;
+            StepperManualWorkTime.Value = Settings.ManualWorkTime;
+            StepperManualBreakTime.Value = Settings.ManualBreakTime;
+
         }
 
         #region 
@@ -27,54 +57,96 @@ namespace WorkerAntX
 
         #region
         // Set button click
-        private void SetBtn(object sender, EventArgs e)
+        private void SetBtnClick(object sender, EventArgs e)
         {
+            //if (RadioBtnManual.IsChecked == true)
+            //{
+            //    Properties.Settings.Default.manualWorkTime = numUDWorkManual.Value * 60;
+            //    Properties.Settings.Default.manualBreakTime = numUDBreakManual.Value * 60;
+            //    Properties.Settings.Default.Save();
+            //}
 
+            //GetLapPackage();
+
+            //labelWorkTimeCountdown.Text = PreviewLapPackage.Work.IntToTimerFormat();
+            //labelBreakTimeCountdown.Text = PreviewLapPackage.Break.IntToTimerFormat();
+            //labelLapCounterLive.Text = PreviewLapPackage.Laps.ToString();
+
+            //progressBarCountdown.Value = Countdown.GetProgressInPercentage(SegmentNames.Paused);
+
+            //Countdown.LastUserInput = PreviewLapPackage;
+            //btnSetReset.Text = "Reset";
+            //Countdown.Set();
+
+            //SaveLapPackageUsed();
         }
 
         // Start/Stop button click
-        private void StartStopBtn(object sender, EventArgs e)
+        private void StartStopBtnClick(object sender, EventArgs e)
         {
+            if (StartStopBtn.Text == "Start")
+            {
+                if (LabelWorkTimeCountdown.Text == "Work Timer" || LabelBreakTimeCountdown.Text == "Break Timer")
+                {
+                    SetBtnClick(null, null);
+                }
+            //    liveDataUpdate.Start();
+            //}
+            //else if (StartStopBtn.Text == "Stop" && Countdown.TimeTickSegment == SegmentNames.Break)
+            //{
+            //    liveDataUpdate.Stop();
+            //}
+
+            //try
+            //{
+            //    StartStopBtn.Text = StartStopBtn.Text.StartStop();
+            //}
+            //catch (TimeoutException ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            //catch (ArgumentOutOfRangeException ex)
+            //{
+            //    MessageBox.Show(ex.Message, "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
         //Radio button check changed
         private void RadioBtnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            GetLapPackage();
-
-
-        }
-
-        // Get radio btn selected lap package
-        private void GetLapPackage()
-        {
-            if (radioBtnManual.IsChecked == false)
+            if (RadioBtnManual.IsChecked == true)
             {
-
-            }
-
-            if (radioBtnManual.IsChecked == true)
-            {
-
-            }
-            else if (radioBtnRecovery.IsChecked == true)
-            {
-
-            }
-            else if (radioBtnSmart.IsChecked == true)
-            {
-
-            }
-            else if (radioBtnProgress.IsChecked == true)
-            {
-
+                StepperManualWorkTime.IsEnabled = true;
+                StepperManualBreakTime.IsEnabled = true;
             }
             else
             {
-
+                StepperManualWorkTime.IsEnabled = false;
+                StepperManualBreakTime.IsEnabled = false;
             }
         }
+
         #endregion
+
+        // work on this 
+
+        private void ManualBreakTimeStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Settings.ManualBreakTime = (int)e.NewValue;
+            LabelManualBreakTimePreview.Text = Convert.ToString((int)e.NewValue);
+        }
+
+        private void ManualWorkTimeStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Settings.ManualWorkTime = (int)e.NewValue;
+            LabelManualWorkTimePreview.Text = Convert.ToString((int)e.NewValue);
+        }
+
+        private void LapCounterStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Settings.LapCounter = (int)e.NewValue;
+            LapCounter.Text = Convert.ToString((int)e.NewValue);
+        }
     }
 }
