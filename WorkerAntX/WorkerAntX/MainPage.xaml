@@ -43,7 +43,7 @@
                 </Image>
             </StackLayout>
         </StackLayout>
-        
+     
         
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <StackLayout>
@@ -118,13 +118,13 @@
                             <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label x:Name="LabelManualWorkTimePreview" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                             <Label Text="Mins" VerticalOptions="Center"/>
-                            <Stepper x:Name="StepperManualWorkTime" Increment="2" HorizontalOptions="End"/>
+                            <Stepper x:Name="StepperManualWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="ManualWorkTimeStepperValueChanged"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label x:Name="LabelManualBreakTimePreview" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                             <Label Text="Mins" VerticalOptions="Center"/>
-                            <Stepper x:Name="StepperManualBreakTime" Increment="1" HorizontalOptions="End"/>
+                            <Stepper x:Name="StepperManualBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="ManualBreakTimeStepperValueChanged"/>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

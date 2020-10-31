@@ -15,15 +15,15 @@
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelRecoveryWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperRecoveryWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperRecoveryWorkTimeValueChanged"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelRecoveryBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperRecoveryBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperRecoveryBreakTimeValueChanged"/>
                             </StackLayout>
                         </StackLayout>
 
@@ -34,15 +34,15 @@
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelSmartWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperSmartWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperSmartWorkTimeValueChanged"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelSmartBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperSmartBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperSmartBreakTimeValueChanged"/>
                             </StackLayout>
                         </StackLayout>
                         
@@ -53,23 +53,23 @@
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelProgressWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperProgressWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperProgressWorkTimeValueChanged"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelProgressBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper Increment="1" HorizontalOptions="End"/>
+                                <Stepper x:Name="StepperProgressBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperProgressBreakTimeValueChanged"/>
                             </StackLayout>
-
                         </StackLayout>
+                        
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                     <Button Clicked="DefaultBtn" Text="Default" HorizontalOptions="FillAndExpand"/>
-                    <Button Clicked="SaveBtn" Text="Save" HorizontalOptions="FillAndExpand"/>
+                    <!--<Button Clicked="SaveBtn" Text="Save" HorizontalOptions="FillAndExpand"/>-->
                 </StackLayout>
             </StackLayout>
             </StackLayout>

@@ -115,38 +115,72 @@ namespace WorkerAntX
         //Radio button check changed
         private void RadioBtnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (RadioBtnManual.IsChecked == true)
-            {
-                StepperManualWorkTime.IsEnabled = true;
-                StepperManualBreakTime.IsEnabled = true;
-            }
-            else
+            if (RadioBtnManual.IsChecked == false)
             {
                 StepperManualWorkTime.IsEnabled = false;
                 StepperManualBreakTime.IsEnabled = false;
             }
+            else
+            {
+                
+            }
+
+            if (RadioBtnManual.IsChecked == true)
+            {
+                StepperManualWorkTime.IsEnabled = true;
+                StepperManualBreakTime.IsEnabled = true;
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Manual;
+            }
+            else if (RadioBtnRecovery.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Recovery;
+            }
+            else if (RadioBtnSmart.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Smart;
+            }
+            else if (RadioBtnProgress.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Progress;
+            }
+            else
+            {
+                // error "Radio Button not found"
+            }
         }
 
-        #endregion
-
-        // work on this 
-
-        private void ManualBreakTimeStepperValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            Settings.ManualBreakTime = (int)e.NewValue;
-            LabelManualBreakTimePreview.Text = Convert.ToString((int)e.NewValue);
-        }
-
+        /// <summary>
+        /// Manual work stepper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">stepper value</param>
         private void ManualWorkTimeStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             Settings.ManualWorkTime = (int)e.NewValue;
-            LabelManualWorkTimePreview.Text = Convert.ToString((int)e.NewValue);
+            LabelManualWorkTimePreview.Text = ((int)e.NewValue).IntToTimerFormat();
         }
 
+        /// <summary>
+        /// Manual break stepper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">stepper value</param>
+        private void ManualBreakTimeStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Settings.ManualBreakTime = (int)e.NewValue;
+            LabelManualBreakTimePreview.Text = ((int)e.NewValue).IntToTimerFormat();
+        }
+
+        /// <summary>
+        /// Lap counter stepper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">stepper value</param>
         private void LapCounterStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             Settings.LapCounter = (int)e.NewValue;
             LapCounter.Text = Convert.ToString((int)e.NewValue);
         }
+        #endregion
     }
 }
