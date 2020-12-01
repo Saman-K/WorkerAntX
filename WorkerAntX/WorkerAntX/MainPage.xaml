@@ -43,16 +43,16 @@
                 </Image>
             </StackLayout>
         </StackLayout>
-     
+        
         
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <StackLayout>
-                <Label x:Name="LabelWorkTimeCountdown" Text="Work Timer" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="LabelWorkTimeCountdown" Text="{Binding Timer,StringFormat='{0:T}'}" FontSize="Title" HorizontalOptions="Center" />
                 <Label x:Name="LabelBreakTimeCountdown" Text="Break Timer" FontSize="Title" HorizontalOptions="Center" />
                 <Label x:Name="LabelLapCountdown" Text="Laps" FontSize="Title" HorizontalOptions="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" >
-                <ProgressBar HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
+                <ProgressBar x:Name="ProgressBarCountdown" HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
             </StackLayout>
 
             <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="10">
@@ -64,11 +64,11 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                         <Label Text="Work:" HorizontalOptions="Center"/>
-                        <Label x:Name="labelSmartBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                        <Label x:Name="LabelSmartWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                         <Label Text="Break:" HorizontalOptions="Center"/>
-                        <Label x:Name="labelSmartWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                        <Label x:Name="LabelSmartBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                     </StackLayout>
                 </StackLayout>
 
@@ -81,11 +81,11 @@
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <Label Text="Work:" HorizontalOptions="Center"/>
-                            <Label x:Name="labelRecoveryWorkTimePreview" Text="0.00" HorizontalOptions="Center"/>
+                            <Label x:Name="LabelRecoveryWorkTimePreview" Text="0.00" HorizontalOptions="Center"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <Label Text="Break:" HorizontalOptions="Center"/>
-                            <Label x:Name="labelRecoveryBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                            <Label x:Name="LabelRecoveryBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                         </StackLayout>
                     </StackLayout>
                     
@@ -97,11 +97,11 @@
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <Label Text="Work:" HorizontalOptions="Center"/>
-                            <Label x:Name="labelProgressWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                            <Label x:Name="LabelProgressWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                             <Label Text="Break:" HorizontalOptions="Center"/>
-                            <Label x:Name="labelProgressBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
+                            <Label x:Name="LabelProgressBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
                         </StackLayout>
                     </StackLayout>
 
@@ -115,13 +115,11 @@
                     </StackLayout>
                     <StackLayout Padding="30, 0, 30, 0">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label x:Name="LabelManualWorkTimePreview" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                             <Label Text="Mins" VerticalOptions="Center"/>
                             <Stepper x:Name="StepperManualWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="ManualWorkTimeStepperValueChanged"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
                             <Label x:Name="LabelManualBreakTimePreview" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                             <Label Text="Mins" VerticalOptions="Center"/>
                             <Stepper x:Name="StepperManualBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="ManualBreakTimeStepperValueChanged"/>
@@ -131,8 +129,7 @@
 
                 <StackLayout VerticalOptions="EndAndExpand">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label Text="Laps:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <Label x:Name="LapCounter" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Label x:Name="LabelLapCounter" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                         <Stepper x:Name="LapCounterStepper" Minimum="1" Maximum="5" Increment="1" HorizontalOptions="End" ValueChanged="LapCounterStepperValueChanged" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">

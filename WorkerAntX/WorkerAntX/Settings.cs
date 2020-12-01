@@ -58,9 +58,6 @@ namespace WorkerAntX
         
         private const string _LastUsedLapPackageKey = "Last_Used_Lap_Package_Key";
         private static readonly int _LastUsedLapPackageDefault = (int)LapPackageNames.Smart;
-
-        private const string _AudioAlertKey = "Audio_Alert_Key";
-        private static readonly bool _AudioAlertDefault = true;
         #endregion
 
         #region properties
@@ -192,17 +189,6 @@ namespace WorkerAntX
                 AppSettings.AddOrUpdateValue(_LastUsedLapPackageKey, value);
             }
         }
-        public static bool AudioAlert
-        {
-            get
-            {
-                return AppSettings.GetValueOrDefault(_AudioAlertKey, _AudioAlertDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(_AudioAlertKey, value);
-            }
-        }
         #endregion
 
         /// <summary>
@@ -217,7 +203,6 @@ namespace WorkerAntX
             ProgressWorkTime = 3300;
             ProgressBreakTime = 300;
             LapCounter = 1;
-            AudioAlert = true;
 
             //Properties.Settings.Default.breakStretches = true;
         }

@@ -1,11 +1,9 @@
 ﻿using System;
-//using System.Threading;
-using WorkerAntX;
 using System.Timers;
 
-namespace WorkerAnt
+namespace WorkerAntX
 {
-    public class Countdown
+    public static class Countdown
     {
         #region Fields and Properties
         #region Fields
@@ -123,7 +121,7 @@ namespace WorkerAnt
         #endregion
 
         #region Initialization
-        public Countdown()
+        public static void Start()
         {
             _countdownTimer = new Timer(1000);
             _countdownTimer.Elapsed += CountdownTimer_Tick;
@@ -165,10 +163,9 @@ namespace WorkerAnt
             else if (TimeTickSegment == SegmentNames.EndBreak)
             {
                 BreakTimerLive++;
-                //if (Settings.AudioAlert == true)
-                //{
-                //    Console.Beep(800, 100);
-                //}
+                //Audio Alert
+                Console.Beep(800, 100);
+                
                 // Can add a limit to how long EndBreak would last
             }
         }
@@ -190,18 +187,16 @@ namespace WorkerAnt
                     {
                         //MessageBox.Show(ex.Message, "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    if (Settings.AudioAlert == true)
-                    {
-                        Console.Beep(1000, 500);
-                    }
+
+                    //Audio Alert
+                    Console.Beep(1000, 500);
+
                     break;
                 case "Break":
                     _countdownTimer.Stop();
                     TimerTick = false;
-                    if (Settings.AudioAlert == true)
-                    {
-                        Console.Beep(1000, 500);
-                    }
+                    //Audio Alert
+                    Console.Beep(1000, 500);
 
                     try
                     {
@@ -226,10 +221,9 @@ namespace WorkerAnt
                         //MessageBox.Show(ex.Message, "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    if (Settings.AudioAlert == true)
-                    {
-                        Console.Beep(1000, 500);
-                    }
+                    //Audio Alert
+                    Console.Beep(1000, 500);
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("function", function, "Please report to the developer (CD 241)");
@@ -241,8 +235,8 @@ namespace WorkerAnt
         /// The input has to be "Start" or "Stop".
         /// </summary>
         /// <param name="btnText">Takes the text of the button and execute the faction</param>
-        /// <returns>The name of the button after execution</returns>this
-        public string StartStop(string btnText)
+        /// <returns>The name of the button after execution</returns>
+        public static string StartStop(this string btnText)
         {
             //Start timer
             if (btnText == "Start")
@@ -301,9 +295,12 @@ namespace WorkerAnt
                 }
                 else
                 {
-                    TimeTickSegment = SegmentNames.Paused;
-                    _countdownTimer.Stop();
-                    TimerTick = false;
+                    if (TimeTickSegment != SegmentNames.Paused)
+                    {
+                        TimeTickSegment = SegmentNames.Paused;
+                        _countdownTimer.Stop();
+                        TimerTick = false; 
+                    }
 
                     return "Start";
                 }
@@ -317,7 +314,7 @@ namespace WorkerAnt
         /// <summary>
         /// Set last used values to the live countdowns.
         /// </summary>
-        public void Set()
+        public static void Set()
         {
             WorkTimerLive = LastUserInput.Work;
             BreakTimerLive = LastUserInput.Break;
@@ -327,7 +324,7 @@ namespace WorkerAnt
         /// <summary>
         /// Skipping to break form work segment.
         /// </summary>
-        public void SkipToBreak()
+        public static void SkipToBreak()
         {
             WorkTimerLive = 0;
             TimerController("Break");
@@ -336,7 +333,7 @@ namespace WorkerAnt
         /// <summary>
         /// Start to the next lap.
         /// </summary>
-        public void StartLap()
+        public static void StartLap()
         {
             _countdownTimer.Stop();
             TimerTick = false;
@@ -352,7 +349,7 @@ namespace WorkerAnt
         /// <summary>
         /// Finish up the last lap 
         /// </summary>
-        public void EndLapPackage()
+        public static void EndLapPackage()
         {
             Set();
 
@@ -364,7 +361,7 @@ namespace WorkerAnt
         /// <summary>
         /// pause after end of lap
         /// </summary>
-        public void PauseBetweenLap()
+        public static void PauseBetweenLap()
         {
             if (LapCounterLive <= 0)
             {
