@@ -134,6 +134,7 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
                         <Button x:Name="SetBtn" Clicked="SetBtnClick" Text="Set" HorizontalOptions="FillAndExpand"/>
+                        <Button x:Name="testBtn" Clicked="testBtn_Clicked" Text="Test" HorizontalOptions="FillAndExpand"/>
                         <Button x:Name="StartStopBtn" Clicked="StartStopBtnClick" Text="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                     </StackLayout>
                 </StackLayout>

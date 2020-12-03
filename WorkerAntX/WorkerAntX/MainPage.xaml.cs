@@ -18,7 +18,6 @@ namespace WorkerAntX
         private (int Work, int Break, int Laps) PreviewLapPackage { get; set; }
         #endregion
 
-
         public MainPage()
         {
             InitializeComponent();
@@ -48,7 +47,6 @@ namespace WorkerAntX
             BindingContext = new MainPageViewModel();
 
             Countdown.Start();
-
 
             ((LabelRecoveryWorkTimePreview.Text, LabelRecoveryBreakTimePreview.Text), (LabelSmartWorkTimePreview.Text, LabelSmartBreakTimePreview.Text), (LabelProgressWorkTimePreview.Text,
                 LabelProgressBreakTimePreview.Text), (LabelManualWorkTimePreview.Text, LabelManualBreakTimePreview.Text), LabelLapCounter.Text) = Settings.GetSattingsLapPackages();
@@ -241,5 +239,12 @@ namespace WorkerAntX
             LabelLapCounter.Text = "Laps:    " + ((int)e.NewValue).ToString();
         }
         #endregion
+
+        private void testBtn_Clicked(object sender, EventArgs e)
+        {
+            LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
+            LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+            LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
+        }
     }
 }

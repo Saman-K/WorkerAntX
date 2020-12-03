@@ -244,7 +244,6 @@ namespace WorkerAntX
                 //start from the top
                 if ((WorkTimerLive == LastUserInput.Work || BreakTimerLive == LastUserInput.Break && LapCounterLive == LastUserInput.Laps) || TimeTickSegment == SegmentNames.EndBreak)
                 {
-
                     LapCounterLive--;
                     TimeTickSegment = SegmentNames.Work;
                     _countdownTimer.Start();
