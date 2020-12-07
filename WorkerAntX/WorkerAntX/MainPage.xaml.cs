@@ -44,9 +44,9 @@ namespace WorkerAntX
                 RadioBtnSmart.IsChecked = true;
             }
 
-            BindingContext = new MainPageViewModel();
+            
 
-            Countdown.Start();
+            Countdown.Initialization();
 
             ((LabelRecoveryWorkTimePreview.Text, LabelRecoveryBreakTimePreview.Text), (LabelSmartWorkTimePreview.Text, LabelSmartBreakTimePreview.Text), (LabelProgressWorkTimePreview.Text,
                 LabelProgressBreakTimePreview.Text), (LabelManualWorkTimePreview.Text, LabelManualBreakTimePreview.Text), LabelLapCounter.Text) = Settings.GetSattingsLapPackages();
@@ -102,9 +102,9 @@ namespace WorkerAntX
 
             Countdown.LastUserInput = PreviewLapPackage;
 
-            LabelWorkTimeCountdown.Text = Countdown.LastUserInput.Work.IntToTimerFormat();
-            LabelBreakTimeCountdown.Text = Countdown.LastUserInput.Break.IntToTimerFormat();
-            LabelLapCountdown.Text = Countdown.LastUserInput.Laps.ToString();
+            //LabelWorkTimeCountdown.Text = Countdown.LastUserInput.Work.IntToTimerFormat();
+            //LabelBreakTimeCountdown.Text = Countdown.LastUserInput.Break.IntToTimerFormat();
+            //LabelLapCountdown.Text = Countdown.LastUserInput.Laps.ToString();
 
             //ProgressBarCountdown.Value = Countdown.GetProgressInPercentage(SegmentNames.Paused);
 
@@ -131,6 +131,7 @@ namespace WorkerAntX
 
                 LapCounterStepper.IsEnabled = false;
                 SetBtn.IsEnabled = false;
+                BindingContext = new MainPageViewModel();
             }
             else if (StartStopBtn.Text == "Stop")
             {

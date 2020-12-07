@@ -47,9 +47,9 @@
         
         <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
             <StackLayout>
-                <Label x:Name="LabelWorkTimeCountdown" Text="{Binding Timer,StringFormat='{0:T}'}" FontSize="Title" HorizontalOptions="Center" />
-                <Label x:Name="LabelBreakTimeCountdown" Text="Break Timer" FontSize="Title" HorizontalOptions="Center" />
-                <Label x:Name="LabelLapCountdown" Text="Laps" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="LabelWorkTimeCountdown" Text="{Binding WorkTimer}" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="LabelBreakTimeCountdown" Text="{Binding BreakTimer}" FontSize="Title" HorizontalOptions="Center" />
+                <Label x:Name="LabelLapCountdown" Text="{Binding LapCounter}" FontSize="Title" HorizontalOptions="Center" />
             </StackLayout>
             <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" >
                 <ProgressBar x:Name="ProgressBarCountdown" HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>

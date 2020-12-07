@@ -121,7 +121,7 @@ namespace WorkerAntX
         #endregion
 
         #region Initialization
-        public static void Start()
+        public static void Initialization()
         {
             _countdownTimer = new Timer(1000);
             _countdownTimer.Elapsed += CountdownTimer_Tick;
