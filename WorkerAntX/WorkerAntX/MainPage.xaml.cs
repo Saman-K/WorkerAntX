@@ -1,8 +1,6 @@
 ﻿using System;
 using WorkerAntX.Views;
 using Xamarin.Forms;
-using System.Timers;
-using WorkerAntX.ViewModel;
 
 namespace WorkerAntX
 {
@@ -44,7 +42,9 @@ namespace WorkerAntX
                 RadioBtnSmart.IsChecked = true;
             }
 
-            
+            //BindingContext = new MainPageViewModel();
+            LiveUpdate();
+
 
             Countdown.Initialization();
 
@@ -74,7 +74,7 @@ namespace WorkerAntX
         }
         #endregion
 
-        #region
+        #region Methods
         // Set button click
         private void SetBtnClick(object sender, EventArgs e)
         {
@@ -102,10 +102,6 @@ namespace WorkerAntX
 
             Countdown.LastUserInput = PreviewLapPackage;
 
-            //LabelWorkTimeCountdown.Text = Countdown.LastUserInput.Work.IntToTimerFormat();
-            //LabelBreakTimeCountdown.Text = Countdown.LastUserInput.Break.IntToTimerFormat();
-            //LabelLapCountdown.Text = Countdown.LastUserInput.Laps.ToString();
-
             //ProgressBarCountdown.Value = Countdown.GetProgressInPercentage(SegmentNames.Paused);
 
             SetBtn.Text = "Reset";
@@ -131,7 +127,6 @@ namespace WorkerAntX
 
                 LapCounterStepper.IsEnabled = false;
                 SetBtn.IsEnabled = false;
-                BindingContext = new MainPageViewModel();
             }
             else if (StartStopBtn.Text == "Stop")
             {
@@ -239,13 +234,32 @@ namespace WorkerAntX
             Settings.LapCounter = (int)e.NewValue;
             LabelLapCounter.Text = "Laps:    " + ((int)e.NewValue).ToString();
         }
+
+        /// <summary>
+        /// Updates The UI
+        /// </summary>
+        public void LiveUpdate()
+        {
+            Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+            {
+                LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
+                LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+                LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
+
+                ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
+                return true;
+            });
+        }
         #endregion
+
 
         private void testBtn_Clicked(object sender, EventArgs e)
         {
             LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
             LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
             LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
+
+
         }
     }
 }

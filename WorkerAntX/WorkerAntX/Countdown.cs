@@ -88,24 +88,24 @@ namespace WorkerAntX
         /// 0 for anything else.
         /// (100 = 100%, 63 = 63%)
         /// </summary>
-        public static int GetProgressInPercentage(SegmentNames segment)
+        public static double GetProgressInPercentage(SegmentNames segment)
         {
-            //if (segment == SegmentNames.Work)
-            //{
-            //    return 100 - ((WorkTimerLive * 100) / LastUserInput.Work);
-            //}
-            //else if (segment == SegmentNames.Break)
-            //{
-            //    return (BreakTimerLive * 100) / LastUserInput.Break;
-            //}
-            //else if (segment == SegmentNames.EndBreak)
-            //{
-            //    return 100;
-            //}
-            //else
-            //{
-            return 0;
-            //}
+            if (segment == SegmentNames.Work)
+            {
+                return 1 - (Convert.ToDouble(WorkTimerLive) / Convert.ToDouble(LastUserInput.Work));
+            }
+            else if (segment == SegmentNames.Break)
+            {
+                return Convert.ToDouble(BreakTimerLive) / Convert.ToDouble(LastUserInput.Break);
+            }
+            else if (segment == SegmentNames.EndBreak)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>
