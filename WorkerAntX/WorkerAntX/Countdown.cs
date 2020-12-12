@@ -123,7 +123,7 @@ namespace WorkerAntX
         #region Initialization
         public static void Initialization()
         {
-            _countdownTimer = new Timer(1000);
+            _countdownTimer = new Timer(100);
             _countdownTimer.Elapsed += CountdownTimer_Tick;
         }
         #endregion
@@ -164,7 +164,7 @@ namespace WorkerAntX
             {
                 BreakTimerLive++;
                 //Audio Alert
-                Console.Beep(800, 100);
+                //Console.Beep(800, 100);
                 
                 // Can add a limit to how long EndBreak would last
             }
@@ -189,23 +189,23 @@ namespace WorkerAntX
                     }
 
                     //Audio Alert
-                    Console.Beep(1000, 500);
+                    //Console.Beep(1000, 500);
 
                     break;
                 case "Break":
                     _countdownTimer.Stop();
                     TimerTick = false;
                     //Audio Alert
-                    Console.Beep(1000, 500);
+                    //Console.Beep(1000, 500);
 
-                    try
-                    {
-                        //(WindowNames.Break);
-                    }
-                    catch (ArgumentOutOfRangeException ex)
-                    {
-                        //MessageBox.Show(ex.Message, "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    //try
+                    //{
+                    //    //(WindowNames.Break);
+                    //}
+                    //catch (ArgumentOutOfRangeException ex)
+                    //{
+                    //    //MessageBox.Show(ex.Message, "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
                     TimeTickSegment = SegmentNames.Break;
                     _countdownTimer.Start();
                     TimerTick = true;
@@ -222,7 +222,7 @@ namespace WorkerAntX
                     }
 
                     //Audio Alert
-                    Console.Beep(1000, 500);
+                    //Console.Beep(1000, 500);
                     
                     break;
                 default:

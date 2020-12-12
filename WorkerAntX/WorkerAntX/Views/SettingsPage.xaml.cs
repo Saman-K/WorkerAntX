@@ -99,7 +99,7 @@ namespace WorkerAntX.Views
         /// <param name="e">stepper value</param>
         private void StepperProgressBreakTimeValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Settings.ProgressWorkTime = (int)e.NewValue;
+            Settings.ProgressBreakTime = (int)e.NewValue;
             LabelProgressBreakTime.Text = ((int)e.NewValue).IntToTimerFormat();
         }
         #endregion

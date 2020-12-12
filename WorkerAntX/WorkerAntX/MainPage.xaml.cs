@@ -114,7 +114,7 @@ namespace WorkerAntX
         {
             if (StartStopBtn.Text == "Start")
             {
-                if (LabelWorkTimeCountdown.Text == "Work Time" || LabelBreakTimeCountdown.Text == "Break Time")
+                if (LabelWorkTimeCountdown.Text == "0:00" || LabelBreakTimeCountdown.Text == "0:00")
                 {
                     SetBtnClick(null, null);
                 }
@@ -243,10 +243,77 @@ namespace WorkerAntX
             Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
             {
                 LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
-                LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+
+                if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
+                {
+                    LabelBreakTimeCountdown.Text = "- " + Countdown.BreakTimerLive.IntToTimerFormat();
+                    LabelBreakTimeCountdown.TextColor = Color.FromHex("#901E26");
+                }
+                else
+                {
+                    LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+                }
+
                 LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
 
-                ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
+                if (Countdown.TimerTick == true)
+                {
+                    StartStopBtn.Text = "Stop";
+                    SetBtn.IsEnabled = false;
+
+                    RadioBtnManual.IsEnabled = false;
+                    StepperManualWorkTime.IsEnabled = false;
+                    StepperManualBreakTime.IsEnabled = false;
+                    RadioBtnRecovery.IsEnabled = false;
+                    RadioBtnSmart.IsEnabled = false;
+                    RadioBtnProgress.IsEnabled = false;
+
+                    LapCounterStepper.IsEnabled = false;
+                }
+                else if (Countdown.TimerTick == false)
+                {
+                    StartStopBtn.Text = "Start";
+                    SetBtn.IsEnabled = true;
+
+                    RadioBtnManual.IsEnabled = true;
+                    if (RadioBtnManual.IsChecked == false)
+                    {
+                        StepperManualWorkTime.IsEnabled = false;
+                        StepperManualBreakTime.IsEnabled = false;
+                    }
+                    else
+                    {
+                        StepperManualWorkTime.IsEnabled = true;
+                        StepperManualBreakTime.IsEnabled = true;
+                    }
+
+                    RadioBtnRecovery.IsEnabled = true;
+                    RadioBtnSmart.IsEnabled = true;
+                    RadioBtnProgress.IsEnabled = true;
+
+                    LapCounterStepper.IsEnabled = true;
+                }
+
+                if (Countdown.TimeTickSegment == SegmentNames.Work)
+                {
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#222222");
+                }
+                else if (Countdown.TimeTickSegment == SegmentNames.Break)
+                {
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Break);
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#407294");
+                }
+                else if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
+                {
+                    ProgressBarCountdown.Progress = 1;
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#901E26");
+                }
+                else
+                {
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Paused);
+                }
+
                 return true;
             });
         }
