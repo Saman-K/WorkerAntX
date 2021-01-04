@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,20 +11,29 @@ namespace WorkerAntX.Views
         {
             InitializeComponent();
 
-            DataReload();
+            GetData();
         }
 
+        public event EventHandler SettingsUpdeted;
+
         #region Methods
-        //------------------------------------------------------------------------- Button
-        // Default Button
+
+        /// <summary>
+        /// Default Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DefaultBtn(object sender, EventArgs e)
         {
             Settings.SetSettingsToDefault();
 
-            DataReload();
+            GetData();
         }
-        // Reload Settings data
-        private void DataReload()
+
+        /// <summary>
+        /// Get Settings data
+        /// </summary>
+        private void GetData()
         {
             StepperRecoveryWorkTime.Value = Settings.RecoveryWorkTime;
             StepperRecoveryBreakTime.Value = Settings.RecoveryBreakTime;
@@ -34,7 +42,17 @@ namespace WorkerAntX.Views
             StepperProgressWorkTime.Value = Settings.ProgressWorkTime;
             StepperProgressBreakTime.Value = Settings.ProgressBreakTime;
         }
-        #endregion
+
+        /// <summary>
+        /// OnBackButtonPressed
+        /// </summary>
+        /// <returns> true: stop the back button</returns>
+        protected override bool OnBackButtonPressed()
+        {
+            SettingsUpdeted?.Invoke(this, null);
+
+            return base.OnBackButtonPressed();
+        }
 
         #region Steppers
         /// <summary>
@@ -102,6 +120,9 @@ namespace WorkerAntX.Views
             Settings.ProgressBreakTime = (int)e.NewValue;
             LabelProgressBreakTime.Text = ((int)e.NewValue).IntToTimerFormat();
         }
+
+        #endregion
+
         #endregion
     }
 }

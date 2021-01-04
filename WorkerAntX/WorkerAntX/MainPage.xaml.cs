@@ -6,14 +6,12 @@ namespace WorkerAntX
 {
     public partial class MainPage : ContentPage
     {
-        #region Properties
+        #region Properties and Field
 
-        //int numbertest;
+        SettingsPage settingsPage = new SettingsPage();
 
-        //private Timer testtimer = new Timer(10000);
-
-        // saving data for preview
         private (int Work, int Break, int Laps) PreviewLapPackage { get; set; }
+
         #endregion
 
         public MainPage()
@@ -42,40 +40,43 @@ namespace WorkerAntX
                 RadioBtnSmart.IsChecked = true;
             }
 
-            //BindingContext = new MainPageViewModel();
             LiveUpdate();
-
 
             Countdown.Initialization();
 
-            ((LabelRecoveryWorkTimePreview.Text, LabelRecoveryBreakTimePreview.Text), (LabelSmartWorkTimePreview.Text, LabelSmartBreakTimePreview.Text), (LabelProgressWorkTimePreview.Text,
-                LabelProgressBreakTimePreview.Text), (LabelManualWorkTimePreview.Text, LabelManualBreakTimePreview.Text), LabelLapCounter.Text) = Settings.GetSattingsLapPackages();
+            settingsPage.SettingsUpdeted += SetSettings;
+            //Countdown.CounterTickEvent += UpdateTimer;
 
-            LapCounterStepper.Value = Settings.LapCounter;
-            StepperManualWorkTime.Value = Settings.ManualWorkTime;
-            StepperManualBreakTime.Value = Settings.ManualBreakTime;
-
-            LabelManualWorkTimePreview.BindingContext = StepperManualWorkTime.Value;
-            LabelManualBreakTimePreview.BindingContext = StepperManualBreakTime.Value;
-            LabelLapCounter.BindingContext = LapCounterStepper.Value;
+            SetSettings(null, null);
+            //UpdateTimer(null, null);
         }
 
-        #region 
-        // Opens Settings page 
+        #region Methods
+        /// <summary>
+        /// Opens Settings page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BtnSettings_ClickAsync(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new SettingsPage());
+            await Navigation.PushModalAsync(settingsPage);
         }
 
-        // Opens About page 
+        /// <summary>
+        /// Opens About page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BtnAbout_ClickAsync(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new AboutPage());
         }
-        #endregion
 
-        #region Methods
-        // Set button click
+        /// <summary>
+        /// Set button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SetBtnClick(object sender, EventArgs e)
         {
             if (RadioBtnRecovery.IsChecked == true)
@@ -106,10 +107,13 @@ namespace WorkerAntX
 
             SetBtn.Text = "Reset";
             Countdown.Set();
-
-            //SaveLapPackageUsed();
         }
-        // Start/Stop button click
+
+        /// <summary>
+        /// Start/Stop button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartStopBtnClick(object sender, EventArgs e)
         {
             if (StartStopBtn.Text == "Start")
@@ -163,7 +167,12 @@ namespace WorkerAntX
                 DisplayAlert("WorkerAnt", ex.Message, "OK");
             }
         }
-        //Radio button check changed
+
+        /// <summary>
+        /// Radio button check changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioBtnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (RadioBtnManual.IsChecked == false)
@@ -244,17 +253,33 @@ namespace WorkerAntX
             {
                 LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
 
-                if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
+                LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+
+                LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
+
+                if (Countdown.TimeTickSegment == SegmentNames.Work)
                 {
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#222222");
+                    LabelBreakTimeCountdown.TextColor = Color.FromHex("#333333");
+                }
+                else if (Countdown.TimeTickSegment == SegmentNames.Break)
+                {
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Break);
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#407294");
+                }
+                else if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
+                {
+                    ProgressBarCountdown.Progress = 1;
+                    ProgressBarCountdown.ProgressColor = Color.FromHex("#901E26");
                     LabelBreakTimeCountdown.Text = "- " + Countdown.BreakTimerLive.IntToTimerFormat();
                     LabelBreakTimeCountdown.TextColor = Color.FromHex("#901E26");
                 }
                 else
                 {
-                    LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
+                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Paused);
+                    LabelBreakTimeCountdown.TextColor = Color.FromHex("#333333");
                 }
-
-                LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
 
                 if (Countdown.TimerTick == true)
                 {
@@ -294,39 +319,32 @@ namespace WorkerAntX
                     LapCounterStepper.IsEnabled = true;
                 }
 
-                if (Countdown.TimeTickSegment == SegmentNames.Work)
-                {
-                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
-                    ProgressBarCountdown.ProgressColor = Color.FromHex("#222222");
-                }
-                else if (Countdown.TimeTickSegment == SegmentNames.Break)
-                {
-                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Break);
-                    ProgressBarCountdown.ProgressColor = Color.FromHex("#407294");
-                }
-                else if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
-                {
-                    ProgressBarCountdown.Progress = 1;
-                    ProgressBarCountdown.ProgressColor = Color.FromHex("#901E26");
-                }
-                else
-                {
-                    ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Paused);
-                }
-
                 return true;
             });
         }
-        #endregion
 
-
-        private void testBtn_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Set settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SetSettings(object sender, EventArgs e)
         {
-            LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
-            LabelBreakTimeCountdown.Text = Countdown.BreakTimerLive.IntToTimerFormat();
-            LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
+            ((LabelRecoveryWorkTimePreview.Text, LabelRecoveryBreakTimePreview.Text), (LabelSmartWorkTimePreview.Text, LabelSmartBreakTimePreview.Text), (LabelProgressWorkTimePreview.Text,
+                LabelProgressBreakTimePreview.Text), (LabelManualWorkTimePreview.Text, LabelManualBreakTimePreview.Text), LabelLapCounter.Text) = Settings.GetSattingsLapPackages();
 
+            LabelManualWorkTimePreview.Text = "Work:    " + LabelManualWorkTimePreview.Text;
+            LabelManualBreakTimePreview.Text = "Break:    " + LabelManualBreakTimePreview.Text;
+            LabelLapCounter.Text = "Laps:    " + LabelLapCounter.Text;
 
+            LapCounterStepper.Value = Settings.LapCounter;
+            StepperManualWorkTime.Value = Settings.ManualWorkTime;
+            StepperManualBreakTime.Value = Settings.ManualBreakTime;
+
+            LabelManualWorkTimePreview.BindingContext = StepperManualWorkTime.Value;
+            LabelManualBreakTimePreview.BindingContext = StepperManualBreakTime.Value;
+            LabelLapCounter.BindingContext = LapCounterStepper.Value;
         }
+        #endregion
     }
 }

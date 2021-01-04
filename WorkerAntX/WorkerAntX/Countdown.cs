@@ -121,9 +121,11 @@ namespace WorkerAntX
         #endregion
 
         #region Initialization
+
+        public static event EventHandler CounterTickEvent;
         public static void Initialization()
         {
-            _countdownTimer = new Timer(100);
+            _countdownTimer = new Timer(1000);
             _countdownTimer.Elapsed += CountdownTimer_Tick;
         }
         #endregion
@@ -141,7 +143,9 @@ namespace WorkerAntX
             {
                 if (WorkTimerLive > 0)
                 {
+
                     WorkTimerLive--;
+
                     if (WorkTimerLive == 300)
                     {
                         TimerController("ToBreakPopup");
@@ -155,6 +159,7 @@ namespace WorkerAntX
             else if (TimeTickSegment == SegmentNames.Break)
             {
                 BreakTimerLive--;
+
                 if (BreakTimerLive == 0)
                 {
                     TimerController("End Break");
@@ -163,9 +168,10 @@ namespace WorkerAntX
             else if (TimeTickSegment == SegmentNames.EndBreak)
             {
                 BreakTimerLive++;
+
                 //Audio Alert
                 //Console.Beep(800, 100);
-                
+
                 // Can add a limit to how long EndBreak would last
             }
         }

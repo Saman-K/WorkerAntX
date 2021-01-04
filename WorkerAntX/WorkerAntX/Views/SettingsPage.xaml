@@ -68,8 +68,8 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+                    <!--<Button Clicked="BackBtn" Text="Back" HorizontalOptions="FillAndExpand"/>-->
                     <Button Clicked="DefaultBtn" Text="Default" HorizontalOptions="FillAndExpand"/>
-                    <!--<Button Clicked="SaveBtn" Text="Save" HorizontalOptions="FillAndExpand"/>-->
                 </StackLayout>
             </StackLayout>
             </StackLayout>
