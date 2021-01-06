@@ -14,9 +14,16 @@ namespace WorkerAntX.Views
             GetData();
         }
 
-        public event EventHandler SettingsUpdeted;
-
         #region Methods
+        /// <summary>
+        /// Opens About page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void BtnAbout_ClickAsync(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new AboutPage());
+        }
 
         /// <summary>
         /// Default Button
@@ -31,27 +38,60 @@ namespace WorkerAntX.Views
         }
 
         /// <summary>
+        /// Radio button check changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RadioBtnCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (RadioBtnRecovery.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Recovery;
+            }
+            else if (RadioBtnBalance.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Balance;
+            }
+            else if (RadioBtnProgress.IsChecked == true)
+            {
+                Settings.LastUsedLapPackage = (int)LapPackageNames.Progress;
+            }
+            else
+            {
+                // error "Radio Button not found"
+            }
+        }
+
+        /// <summary>
         /// Get Settings data
         /// </summary>
         private void GetData()
         {
             StepperRecoveryWorkTime.Value = Settings.RecoveryWorkTime;
             StepperRecoveryBreakTime.Value = Settings.RecoveryBreakTime;
-            StepperSmartWorkTime.Value = Settings.SmartWorkTime;
-            StepperSmartBreakTime.Value = Settings.SmartBreakTime;
+            StepperBalanceWorkTime.Value = Settings.BalanceWorkTime;
+            StepperBalanceBreakTime.Value = Settings.BalanceBreakTime;
             StepperProgressWorkTime.Value = Settings.ProgressWorkTime;
             StepperProgressBreakTime.Value = Settings.ProgressBreakTime;
-        }
+            LapCounterStepper.Value = Settings.LapCounter;
 
-        /// <summary>
-        /// OnBackButtonPressed
-        /// </summary>
-        /// <returns> true: stop the back button</returns>
-        protected override bool OnBackButtonPressed()
-        {
-            SettingsUpdeted?.Invoke(this, null);
-
-            return base.OnBackButtonPressed();
+            if (Settings.LastUsedLapPackage == (int)LapPackageNames.Recovery)
+            {
+                RadioBtnRecovery.IsChecked = true;
+            }
+            else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Balance)
+            {
+                RadioBtnBalance.IsChecked = true;
+            }
+            else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Progress)
+            {
+                RadioBtnProgress.IsChecked = true;
+            }
+            else
+            {
+                // error "Radio Button not found!"
+                RadioBtnBalance.IsChecked = true;
+            }
         }
 
         #region Steppers
@@ -78,14 +118,14 @@ namespace WorkerAntX.Views
         }
 
         /// <summary>
-        /// Smart work stepper
+        /// Balance work stepper
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">stepper value</param>
-        private void StepperSmartWorkTimeValueChanged(object sender, ValueChangedEventArgs e)
+        private void StepperBalanceWorkTimeValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Settings.SmartWorkTime = (int)e.NewValue;
-            LabelSmartWorkTime.Text = ((int)e.NewValue).IntToTimerFormat();
+            Settings.BalanceWorkTime = (int)e.NewValue;
+            LabelBalanceWorkTime.Text = ((int)e.NewValue).IntToTimerFormat();
         }
 
         /// <summary>
@@ -93,10 +133,10 @@ namespace WorkerAntX.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">stepper value</param>
-        private void StepperSmartBreakTimeValueChanged(object sender, ValueChangedEventArgs e)
+        private void StepperBalanceBreakTimeValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Settings.SmartBreakTime = (int)e.NewValue;
-            LabelSmartBreakTime.Text = ((int)e.NewValue).IntToTimerFormat();
+            Settings.BalanceBreakTime = (int)e.NewValue;
+            LabelBalanceBreakTime.Text = ((int)e.NewValue).IntToTimerFormat();
         }
 
         /// <summary>
@@ -119,6 +159,17 @@ namespace WorkerAntX.Views
         {
             Settings.ProgressBreakTime = (int)e.NewValue;
             LabelProgressBreakTime.Text = ((int)e.NewValue).IntToTimerFormat();
+        }
+
+        /// <summary>
+        /// Lap counter stepper
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">stepper value</param>
+        private void LapCounterStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Settings.LapCounter = (int)e.NewValue;
+            LabelLapCounter.Text = "Laps:    " + ((int)e.NewValue).ToString();
         }
 
         #endregion

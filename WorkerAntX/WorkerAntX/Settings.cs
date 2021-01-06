@@ -29,12 +29,12 @@ namespace WorkerAntX
         private static readonly int _RecoveryBreakDefault = 120;
         #endregion
 
-        #region Smart
-        private const string _SmartWorkKey = "Smart_Work_Key";
-        private static readonly int _SmartWorkDefault = 2400;
+        #region Balance
+        private const string _BalanceWorkKey = "Balance_Work_Key";
+        private static readonly int _BalanceWorkDefault = 2400;
 
-        private const string _SmartBreakKey = "Smart_Break_Key";
-        private static readonly int _SmartBreakDefault = 240;
+        private const string _BalanceBreakKey = "Balance_Break_Key";
+        private static readonly int _BalanceBreakDefault = 240;
         #endregion
 
         #region Progress
@@ -45,19 +45,11 @@ namespace WorkerAntX
         private static readonly int _ProgressBreakDefault = 300;
         #endregion
 
-        #region Manual
-        private const string _ManualWorkKey = "Manual_Work_Key";
-        private static readonly int _ManualWorkDefault = 2700;
-
-        private const string _ManualBreakKey = "Manual_Break_Key";
-        private static readonly int _ManualBreakDefault = 240;
-        #endregion
-
         private const string _LapCounterKey = "Lap_Counter_Key";
         private static readonly int _LapCounterDefault = 1;
         
         private const string _LastUsedLapPackageKey = "Last_Used_Lap_Package_Key";
-        private static readonly int _LastUsedLapPackageDefault = (int)LapPackageNames.Smart;
+        private static readonly int _LastUsedLapPackageDefault = (int)LapPackageNames.Balance;
         #endregion
 
         #region properties
@@ -88,28 +80,28 @@ namespace WorkerAntX
         }
         #endregion
 
-        #region Smart
-        public static int SmartWorkTime
+        #region Balance
+        public static int BalanceWorkTime
         {
             get
             {
-                return AppSettings.GetValueOrDefault(_SmartWorkKey, _SmartWorkDefault);
+                return AppSettings.GetValueOrDefault(_BalanceWorkKey, _BalanceWorkDefault);
             }
             set
             {
-                AppSettings.AddOrUpdateValue(_SmartWorkKey, value);
+                AppSettings.AddOrUpdateValue(_BalanceWorkKey, value);
             }
         }
 
-        public static int SmartBreakTime
+        public static int BalanceBreakTime
         {
             get
             {
-                return AppSettings.GetValueOrDefault(_SmartBreakKey, _SmartBreakDefault);
+                return AppSettings.GetValueOrDefault(_BalanceBreakKey, _BalanceBreakDefault);
             }
             set
             {
-                AppSettings.AddOrUpdateValue(_SmartBreakKey, value);
+                AppSettings.AddOrUpdateValue(_BalanceBreakKey, value);
             }
         }
         #endregion
@@ -139,33 +131,6 @@ namespace WorkerAntX
             }
         }
         #endregion
-
-        #region Manual
-        public static int ManualWorkTime
-        {
-            get
-            {
-                return AppSettings.GetValueOrDefault(_ManualWorkKey, _ManualWorkDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(_ManualWorkKey, value);
-            }
-        }
-
-        public static int ManualBreakTime
-        {
-            get
-            {
-                return AppSettings.GetValueOrDefault(_ManualBreakKey, _ManualBreakDefault);
-            }
-            set
-            {
-                AppSettings.AddOrUpdateValue(_ManualBreakKey, value);
-            }
-        }
-        #endregion
-
         public static int LapCounter
         {
             get
@@ -198,8 +163,8 @@ namespace WorkerAntX
         {
             RecoveryWorkTime = 1800;
             RecoveryBreakTime = 120;
-            SmartWorkTime = 2400;
-            SmartBreakTime = 240;
+            BalanceWorkTime = 2400;
+            BalanceBreakTime = 240;
             ProgressWorkTime = 3300;
             ProgressBreakTime = 300;
             LapCounter = 1;
@@ -210,21 +175,19 @@ namespace WorkerAntX
         /// <summary>
         /// Get lap Packages working settings.
         /// </summary>
-        /// <returns>(W,B) Recovery, (W,B) Smart, (W,B) Progress, Lap Counter</returns>
-        public static ((string workRecovery, string breakRecovery), (string workSmart, string breakSmart), (string workProgress, string breakProgress), (string workManual, string breakManual), string lapCounter)
+        /// <returns>(W,B) Recovery, (W,B) Balance, (W,B) Progress, Lap Counter</returns>
+        public static ((string workRecovery, string breakRecovery), (string workBalance, string breakBalance), (string workProgress, string breakProgress), string lapCounter)
             GetSattingsLapPackages()
         {
             string workRecovery = (RecoveryWorkTime.IntToTimerFormat()).ToString();
             string breakRecovery = (RecoveryBreakTime.IntToTimerFormat()).ToString();
-            string workSmart = (SmartWorkTime.IntToTimerFormat()).ToString();
-            string breakSmart = (SmartBreakTime.IntToTimerFormat()).ToString();
+            string workBalance = (BalanceWorkTime.IntToTimerFormat()).ToString();
+            string breakBalance = (BalanceBreakTime.IntToTimerFormat()).ToString();
             string workProgress = (ProgressWorkTime.IntToTimerFormat()).ToString();
             string breakProgress = (ProgressBreakTime.IntToTimerFormat()).ToString();
-            string workManual = (ManualWorkTime.IntToTimerFormat()).ToString();
-            string breakManual = (ManualBreakTime.IntToTimerFormat()).ToString();
             string lapCounter = (LapCounter).ToString();
 
-            return ((workRecovery, breakRecovery), (workSmart, breakSmart), (workProgress, breakProgress), (workManual, breakManual), lapCounter);
+            return ((workRecovery, breakRecovery), (workBalance, breakBalance), (workProgress, breakProgress), lapCounter);
         }
 
         #region ------------------------------------------------------------------------- Extended Methods 
@@ -252,17 +215,13 @@ namespace WorkerAntX
             int BreakTime = 0;
             switch (package)
             {
-                case (LapPackageNames.Manual):
-                    WorkTime = Convert.ToInt16(Settings.ManualWorkTime);
-                    BreakTime = Convert.ToInt16(Settings.ManualBreakTime);
-                    break;
                 case (LapPackageNames.Recovery):
                     WorkTime = Convert.ToInt16(Settings.RecoveryWorkTime);
                     BreakTime = Convert.ToInt16(Settings.RecoveryBreakTime);
                     break;
-                case (LapPackageNames.Smart):
-                    WorkTime = Convert.ToInt16(Settings.SmartWorkTime);
-                    BreakTime = Convert.ToInt16(Settings.SmartBreakTime);
+                case (LapPackageNames.Balance):
+                    WorkTime = Convert.ToInt16(Settings.BalanceWorkTime);
+                    BreakTime = Convert.ToInt16(Settings.BalanceBreakTime);
                     break;
                 case (LapPackageNames.Progress):
                     WorkTime = Convert.ToInt16(Settings.ProgressWorkTime);

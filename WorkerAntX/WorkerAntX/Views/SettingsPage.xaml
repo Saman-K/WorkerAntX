@@ -3,14 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkerAntX.Views.SettingsPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#666666" Padding="20">
-            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" >
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  BackgroundColor="#666666" Padding="5">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Image Source="Plus_666666.png" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BtnAbout_ClickAsync"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label HorizontalOptions="End">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="About"  TextDecorations="Underline" TextColor="White">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer  Tapped="BtnAbout_ClickAsync"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Padding="15, 0, 15, 15">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <!--Recovery Progress Smart-->
+
+                    <StackLayout HorizontalOptions="Center">
+                        <Label Text="Settings" FontSize="Body"/>
+                    </StackLayout>
+                    <!--Recovery Balance Progress-->
                     <StackLayout>
                         <!--Recovery-->
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
+                                <RadioButton x:Name="RadioBtnRecovery" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
                                 <Label Text="Recovery" VerticalOptions="Center" FontSize="Body"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -27,28 +52,30 @@
                             </StackLayout>
                         </StackLayout>
 
-                        <!--Smart-->
+                        <!--Balance-->
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Smart" VerticalOptions="Center" FontSize="Body"/>
+                                <RadioButton x:Name="RadioBtnBalance" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
+                                <Label Text="Balance" VerticalOptions="Center" FontSize="Body"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label x:Name="LabelSmartWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelBalanceWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperSmartWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperSmartWorkTimeValueChanged"/>
+                                <Stepper x:Name="StepperBalanceWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperBalanceWorkTimeValueChanged"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                <Label x:Name="LabelSmartBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                                <Label x:Name="LabelBalanceBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                                 <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperSmartBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperSmartBreakTimeValueChanged"/>
+                                <Stepper x:Name="StepperBalanceBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperBalanceBreakTimeValueChanged"/>
                             </StackLayout>
                         </StackLayout>
                         
                         <!--Progress-->
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
+                                <RadioButton x:Name="RadioBtnProgress" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
                                 <Label Text="Progress" VerticalOptions="Center" FontSize="Body"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -67,8 +94,14 @@
                         
                     </StackLayout>
                 </StackLayout>
+
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                    <!--<Button Clicked="BackBtn" Text="Back" HorizontalOptions="FillAndExpand"/>-->
+                    <Label Text="Rounds  " VerticalOptions="Center" FontSize="Body"/>
+                    <Label x:Name="LabelLapCounter" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                    <Stepper x:Name="LapCounterStepper" Minimum="1" Maximum="5" Increment="1" HorizontalOptions="End" ValueChanged="LapCounterStepperValueChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                     <Button Clicked="DefaultBtn" Text="Default" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
             </StackLayout>

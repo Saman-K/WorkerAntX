@@ -6,9 +6,8 @@ namespace WorkerAntX
     /// </summary>
     public enum LapPackageNames
     {
-        Manual,
         Recovery,
-        Smart,
+        Balance,
         Progress
     }
     /// <summary>
