@@ -36,19 +36,17 @@
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
                                 <RadioButton x:Name="RadioBtnRecovery" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                                <Label Text="Recovery" VerticalOptions="Center" FontSize="Body"/>
+                                <Label Text="Recovery" VerticalOptions="Center" FontSize="15"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelRecoveryWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperRecoveryWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperRecoveryWorkTimeValueChanged"/>
+                                <Stepper x:Name="StepperRecoveryWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperRecoveryWorkTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelRecoveryBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperRecoveryBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperRecoveryBreakTimeValueChanged"/>
+                                <Stepper x:Name="StepperRecoveryBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperRecoveryBreakTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                         </StackLayout>
 
@@ -56,19 +54,17 @@
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
                                 <RadioButton x:Name="RadioBtnBalance" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                                <Label Text="Balance" VerticalOptions="Center" FontSize="Body"/>
+                                <Label Text="Balance" VerticalOptions="Center" FontSize="15"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelBalanceWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperBalanceWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperBalanceWorkTimeValueChanged"/>
+                                <Stepper x:Name="StepperBalanceWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperBalanceWorkTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelBalanceBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperBalanceBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperBalanceBreakTimeValueChanged"/>
+                                <Stepper x:Name="StepperBalanceBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperBalanceBreakTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                         </StackLayout>
                         
@@ -76,19 +72,17 @@
                         <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <StackLayout Orientation="Horizontal">
                                 <RadioButton x:Name="RadioBtnProgress" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                                <Label Text="Progress" VerticalOptions="Center" FontSize="Body"/>
+                                <Label Text="Progress" VerticalOptions="Center" FontSize="15"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Work:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelProgressWorkTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperProgressWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperProgressWorkTimeValueChanged"/>
+                                <Stepper x:Name="StepperProgressWorkTime" Increment="60" HorizontalOptions="End" Maximum="6000" ValueChanged="StepperProgressWorkTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                 <Label Text="Break:" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 <Label x:Name="LabelProgressBreakTime" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                                <Label Text="Mins" VerticalOptions="Center"/>
-                                <Stepper x:Name="StepperProgressBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperProgressBreakTimeValueChanged"/>
+                                <Stepper x:Name="StepperProgressBreakTime" Increment="10" HorizontalOptions="End" Maximum="3000" ValueChanged="StepperProgressBreakTimeValueChanged" HeightRequest="40"/>
                             </StackLayout>
                         </StackLayout>
                         
@@ -96,9 +90,9 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
-                    <Label Text="Rounds  " VerticalOptions="Center" FontSize="Body"/>
-                    <Label x:Name="LabelLapCounter" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                    <Stepper x:Name="LapCounterStepper" Minimum="1" Maximum="5" Increment="1" HorizontalOptions="End" ValueChanged="LapCounterStepperValueChanged" />
+                    <Label Text="Rounds:" VerticalOptions="Center" FontSize="15"/>
+                    <Label x:Name="LabelLapCounter" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                    <Stepper x:Name="LapCounterStepper" Minimum="1" Maximum="5" Increment="1" HorizontalOptions="End" ValueChanged="LapCounterStepperValueChanged"  HeightRequest="40"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">

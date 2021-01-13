@@ -11,6 +11,7 @@ namespace WorkerAntX.Views
         {
             InitializeComponent();
 
+
             GetData();
         }
 
@@ -169,7 +170,7 @@ namespace WorkerAntX.Views
         private void LapCounterStepperValueChanged(object sender, ValueChangedEventArgs e)
         {
             Settings.LapCounter = (int)e.NewValue;
-            LabelLapCounter.Text = "Laps:    " + ((int)e.NewValue).ToString();
+            LabelLapCounter.Text = ((int)e.NewValue).ToString();
         }
 
         #endregion

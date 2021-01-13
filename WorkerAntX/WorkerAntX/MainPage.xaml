@@ -4,7 +4,7 @@
              x:Class="WorkerAntX.MainPage">
 
 
-    <StackLayout BackgroundColor="#666666" Padding="5">
+    <StackLayout x:Name="MainBackground" BackgroundColor="#666666" Padding="5">
         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label HorizontalOptions="Start">
@@ -43,68 +43,18 @@
                 </Image>
             </StackLayout>
         </StackLayout>
-        
-        
-        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-            <StackLayout>
-                <Label x:Name="LabelLapPackageNames" Text="!LapPackageNames!" HorizontalOptions="Center"/>
-                <Label x:Name="LabelWorkTimeCountdown" Text="0!" FontSize="Title" HorizontalOptions="Center" />
-                <Label x:Name="LabelBreakTimeCountdown" Text="0!" FontSize="Title" HorizontalOptions="Center" />
-                <Label x:Name="LabelLapCountdown" Text="0!" FontSize="Title" HorizontalOptions="Center" />
-            <!--</StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill" >-->
-                <ProgressBar x:Name="ProgressBarCountdown" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
+
+
+        <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label x:Name="LabelLapPackageNames" Text="!LapPackageNames!" FontSize="18" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Label x:Name="LabelWorkTimeCountdown" Text="0!" FontSize="72" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Label x:Name="LabelBreakTimeCountdown" Text="0!" FontSize="80" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Label x:Name="LabelLapCountdown" Text="0!" FontSize="50" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                <ProgressBar x:Name="ProgressBarCountdown" HorizontalOptions="FillAndExpand" Progress="0.5" ProgressColor="#222222"></ProgressBar>
             </StackLayout>
-
-            <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="10">
-                <!--Smart
-                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <StackLayout Orientation="Horizontal">
-                        <RadioButton x:Name="RadioBtnSmart" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                        <Label Text="Smart" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Work:" HorizontalOptions="Center"/>
-                        <Label x:Name="LabelSmartWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Break:" HorizontalOptions="Center"/>
-                        <Label x:Name="LabelSmartBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>-->
-
-                <!--Recovery
-                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <StackLayout Orientation="Horizontal">
-                            <RadioButton x:Name="RadioBtnRecovery" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                            <Label Text="Recovery" VerticalOptions="Center"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Work:" HorizontalOptions="Center"/>
-                            <Label x:Name="LabelRecoveryWorkTimePreview" Text="0.00" HorizontalOptions="Center"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Break:" HorizontalOptions="Center"/>
-                            <Label x:Name="LabelRecoveryBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </StackLayout>-->
-                    
-                <!--Progress
-                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <StackLayout Orientation="Horizontal">
-                            <RadioButton x:Name="RadioBtnProgress" CheckedChanged="RadioBtnCheckedChanged" GroupName="LapPackageNames"/>
-                            <Label Text="Progress" VerticalOptions="Center"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Work:" HorizontalOptions="Center"/>
-                            <Label x:Name="LabelProgressWorkTimePreview" Text="0:00" HorizontalOptions="Center"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Break:" HorizontalOptions="Center"/>
-                            <Label x:Name="LabelProgressBreakTimePreview" Text="0:00" HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </StackLayout>-->
-
+            
+            <StackLayout VerticalOptions="EndAndExpand" Orientation="Vertical" Padding="10">
                 <StackLayout VerticalOptions="EndAndExpand">
                     <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Padding="20, 0,20 ,0">
                         <Button x:Name="StartStopBtn" Clicked="StartStopBtnClick" Text="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>

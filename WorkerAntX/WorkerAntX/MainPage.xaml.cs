@@ -59,19 +59,27 @@ namespace WorkerAntX
             if (Settings.LastUsedLapPackage == (int)LapPackageNames.Recovery)
             {
                 PreviewLapPackage = LapPackageNames.Recovery.GetLapPackageValue();
+                LabelLapPackageNames.Text = "Recovery";
+                MainBackground.BackgroundColor = Color.FromHex("#00a787");
             }
             else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Balance)
             {
                 PreviewLapPackage = LapPackageNames.Balance.GetLapPackageValue();
+                LabelLapPackageNames.Text = "Balance";
+                MainBackground.BackgroundColor = Color.FromHex("#0082c1");
             }
             else if (Settings.LastUsedLapPackage == (int)LapPackageNames.Progress)
             {
                 PreviewLapPackage = LapPackageNames.Progress.GetLapPackageValue();
+                LabelLapPackageNames.Text = "Progress";
+                MainBackground.BackgroundColor = Color.FromHex("#d95252");
+
             }
             else
             {
                 //MessageBox.Show("Radio Button not found!", "WorkerAnt", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 PreviewLapPackage = LapPackageNames.Balance.GetLapPackageValue();
+                LabelLapPackageNames.Text = "!";
             }
 
             Countdown.LastUserInput = PreviewLapPackage;
@@ -134,7 +142,7 @@ namespace WorkerAntX
                 {
                     ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
                     ProgressBarCountdown.ProgressColor = Color.FromHex("#222222");
-                    LabelBreakTimeCountdown.TextColor = Color.FromHex("#333333");
+                    LabelBreakTimeCountdown.TextColor = LabelWorkTimeCountdown.TextColor;
                 }
                 else if (Countdown.TimeTickSegment == SegmentNames.Break)
                 {
@@ -151,7 +159,7 @@ namespace WorkerAntX
                 else
                 {
                     ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Paused);
-                    LabelBreakTimeCountdown.TextColor = Color.FromHex("#333333");
+                    LabelBreakTimeCountdown.TextColor = LabelWorkTimeCountdown.TextColor;
                 }
 
                 if (Countdown.TimerTick == true)
