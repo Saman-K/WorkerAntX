@@ -11,8 +11,18 @@ namespace WorkerAntX.Views
         {
             InitializeComponent();
 
-
             GetData();
+
+            LabelRecoveryWorkTime.Text = Settings.RecoveryWorkTime.IntToTimerFormat();
+            LabelRecoveryBreakTime.Text = Settings.RecoveryBreakTime.IntToTimerFormat();
+
+            LabelBalanceWorkTime.Text = Settings.BalanceWorkTime.IntToTimerFormat();
+            LabelBalanceBreakTime.Text = Settings.BalanceBreakTime.IntToTimerFormat();
+
+            LabelProgressWorkTime.Text = Settings.ProgressWorkTime.IntToTimerFormat();
+            LabelProgressBreakTime.Text = Settings.ProgressBreakTime.IntToTimerFormat();
+
+            LabelLapCounter.Text = Settings.LapCounter.ToString();
         }
 
         #region Methods
@@ -130,7 +140,7 @@ namespace WorkerAntX.Views
         }
 
         /// <summary>
-        /// Smart break stepper
+        /// Balance break stepper
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">stepper value</param>
