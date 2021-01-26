@@ -4,12 +4,17 @@
              x:Class="WorkerAntX.Views.AboutPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="#222222">
+            <Image Source="" HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoBack_ClickAsync"/>
+                </Image.GestureRecognizers>
+            </Image>
             <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10,10,10,10">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10,10,10,10">
-                    <Label Text="WAX" FontSize="Large" TextColor="#888888"/>
+                    <Label Text="Worker Ant X" FontSize="Large" TextColor="#888888"/>
                 </StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10,10,10,10">
-                    <Label Text="This was developed in Xamarin.Form as a multi-platform app. Developed by Saman.K." FontSize="Large" TextColor="#888888"/>
+                    <Label Text="This is the mobile version of Worker Ant." FontSize="Large" TextColor="#888888"/>
                 </StackLayout>
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="10,10,10,10">
                     <Label Text="Developed by Saman.K." FontSize="Large" TextColor="#888888"/>
@@ -21,7 +26,7 @@
                                 <Span Text="Website: " />
                                 <Span Text="SamanK.me"  TextDecorations="Underline" TextColor="White">
                                     <Span.GestureRecognizers>
-                                        <TapGestureRecognizer/>
+                                        <TapGestureRecognizer Tapped="Website_Click"/>
                                     </Span.GestureRecognizers>
                                 </Span>
                             </FormattedString>
@@ -33,7 +38,7 @@
                                 <Span Text="Github.com/" />
                                 <Span Text="Saman-K"  TextDecorations="Underline" TextColor="White">
                                     <Span.GestureRecognizers>
-                                        <TapGestureRecognizer/>
+                                        <TapGestureRecognizer Tapped="Github_click"/>
                                     </Span.GestureRecognizers>
                                 </Span>
                             </FormattedString>

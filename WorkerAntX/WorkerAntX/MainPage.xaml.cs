@@ -23,9 +23,9 @@ namespace WorkerAntX
             LiveUpdate();
 
             SetBtnClick(null, null);
-            //Countdown.CounterTickEvent += UpdateTimer;
 
-            //UpdateTimer(null, null);
+            NavigationPage.SetHasNavigationBar(this, false);
+
         }
 
         #region Methods
