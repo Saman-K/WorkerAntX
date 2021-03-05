@@ -99,11 +99,6 @@ namespace WorkerAntX
         {
             if (StartStopBtn.Text == "Start")
             {
-                if (LabelWorkTimeCountdown.Text == "0:00" || LabelBreakTimeCountdown.Text == "0:00")
-                {
-                    SetBtnClick(null, null);
-                }
-
                 SetBtn.IsEnabled = false;
             }
             else if (StartStopBtn.Text == "Stop")
@@ -123,6 +118,12 @@ namespace WorkerAntX
             {
                 DisplayAlert("WorkerAnt", ex.Message, "OK");
             }
+
+
+            if (StartStopBtn.Text == "Start")
+            {
+                DependencyService.Get<INotification>().CreateNotification(LabelLapPackageNames.Text, "Timer paused", Countdown.TimeTickSegment.ToString(), (int)Countdown.GetProgressInPercentage(SegmentNames.Paused));
+            }
         }
 
         /// <summary>
@@ -130,7 +131,7 @@ namespace WorkerAntX
         /// </summary>
         public void LiveUpdate()
         {
-            Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+            Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
             {
                 LabelWorkTimeCountdown.Text = Countdown.WorkTimerLive.IntToTimerFormat();
 
@@ -138,16 +139,21 @@ namespace WorkerAntX
 
                 LabelLapCountdown.Text = Countdown.LapCounterLive.ToString();
 
+
                 if (Countdown.TimeTickSegment == SegmentNames.Work)
                 {
                     ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Work);
                     ProgressBarCountdown.ProgressColor = Color.FromHex("#222222");
                     LabelBreakTimeCountdown.TextColor = LabelWorkTimeCountdown.TextColor;
+
+                    DependencyService.Get<INotification>().CreateNotification(LabelLapPackageNames.Text, Countdown.TimeTickSegment.ToString(), Countdown.WorkTimerLive.IntToTimerFormat(), (int)(Countdown.GetProgressInPercentage(SegmentNames.Work) * 1000));
                 }
                 else if (Countdown.TimeTickSegment == SegmentNames.Break)
                 {
                     ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Break);
                     ProgressBarCountdown.ProgressColor = Color.FromHex("#407294");
+
+                    DependencyService.Get<INotification>().CreateNotification(LabelLapPackageNames.Text, Countdown.TimeTickSegment.ToString(), Countdown.BreakTimerLive.IntToTimerFormat(), (int)(Countdown.GetProgressInPercentage(SegmentNames.Break) * 1000));
                 }
                 else if (Countdown.TimeTickSegment == SegmentNames.EndBreak)
                 {
@@ -155,6 +161,8 @@ namespace WorkerAntX
                     ProgressBarCountdown.ProgressColor = Color.FromHex("#901E26");
                     LabelBreakTimeCountdown.Text = "- " + Countdown.BreakTimerLive.IntToTimerFormat();
                     LabelBreakTimeCountdown.TextColor = Color.FromHex("#901E26");
+
+                    DependencyService.Get<INotification>().CreateNotification(LabelLapPackageNames.Text, "Break has ended", "- " + Countdown.BreakTimerLive.IntToTimerFormat(), (int)(Countdown.GetProgressInPercentage(SegmentNames.EndBreak) * 1000));
                 }
                 else
                 {
@@ -176,6 +184,28 @@ namespace WorkerAntX
                 return true;
             });
         }
+
+        /// <summary>
+        /// Notify Btn (for test)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NotifyBtnClicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<INotification>().CreateNotification(LabelLapPackageNames.Text, "Timer paused", Countdown.TimeTickSegment.ToString(), (int)Countdown.GetProgressInPercentage(SegmentNames.Paused));
+
+        }
+
+        /// <summary>
+        /// Skip to break (for test)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BreakBtnClicked(object sender, EventArgs e)
+        {
+            Countdown.WorkTimerLive = 0;
+        }
+
         #endregion
     }
 }

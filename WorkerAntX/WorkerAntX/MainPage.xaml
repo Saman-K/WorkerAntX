@@ -58,7 +58,12 @@
                 <StackLayout VerticalOptions="EndAndExpand">
                     <StackLayout Orientation="Vertical" HorizontalOptions="Fill" Padding="20, 0,20 ,0">
                         <Button x:Name="StartStopBtn" Clicked="StartStopBtnClick" Text="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                        <Button x:Name="SetBtn" Clicked="SetBtnClick" Text="Set" HorizontalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Button x:Name="SetBtn" Clicked="SetBtnClick" Text="Reset" VerticalOptions="Center"/>
+                            <!--<Button x:Name="BreakBtn" Clicked="BreakBtnClicked"  Text="jump to Break" HorizontalOptions="Center"/>-->
+                            <!--<Button x:Name="NotifyBtn"  Clicked="NotifyBtnClicked"  Text="Notify" HorizontalOptions="Center"/>-->
+
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
