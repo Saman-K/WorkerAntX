@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using WorkerAntX.Messages;
+using Xamarin.Forms;
 using Foundation;
 using UIKit;
+using WorkerAntX.iOS.Services;
 
 namespace WorkerAntX.iOS
 {
@@ -26,6 +28,18 @@ namespace WorkerAntX.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+        iOSLongRunningTask longRunningTask;
+        void WireUpLongRunningTask()
+        {
+            MessagingCenter.Subscribe<SS>(this, "StartLongRunningTaskMessage", async message => {
+                longRunningTask = new iOSLongRunningTask();
+                await longRunningTask.Start();
+            });
+
+            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message => {
+                longRunningTask.Stop();
+            });
         }
     }
 }

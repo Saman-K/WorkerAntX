@@ -122,7 +122,7 @@ namespace WorkerAntX
 
         #region Initialization
 
-        public static event EventHandler CounterTickEvent;
+        //public static event EventHandler CounterTickEvent;
         public static void Initialization()
         {
             _countdownTimer = new Timer(1000);
@@ -179,7 +179,7 @@ namespace WorkerAntX
         /// <summary>
         /// This will control the CountdownTimer() 
         /// </summary>
-        /// <param name="function">Function that the controller has to complete </param>
+        /// <param name="function">Function that the controller has to complete </param> 
         private static void TimerController(string function)
         {
             switch (function)

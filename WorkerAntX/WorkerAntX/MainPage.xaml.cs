@@ -1,6 +1,7 @@
 ﻿using System;
 using WorkerAntX.Views;
 using Xamarin.Forms;
+using WorkerAntX.Messages;
 
 namespace WorkerAntX
 {
@@ -99,10 +100,16 @@ namespace WorkerAntX
         {
             if (StartStopBtn.Text == "Start")
             {
+                var message = new StartLongRunningTaskMessage();
+                MessagingCenter.Send(message, "StartLongRunningTaskMessage");
+
                 SetBtn.IsEnabled = false;
             }
             else if (StartStopBtn.Text == "Stop")
             {
+                var message = new StopLongRunningTaskMessage();
+                MessagingCenter.Send(message, "StopLongRunningTaskMessage");
+
                 SetBtn.IsEnabled = true;
             }
 
@@ -166,6 +173,9 @@ namespace WorkerAntX
                 }
                 else
                 {
+                    var message = new StopLongRunningTaskMessage();
+                    MessagingCenter.Send(message, "StopLongRunningTaskMessage");
+
                     ProgressBarCountdown.Progress = Countdown.GetProgressInPercentage(SegmentNames.Paused);
                     LabelBreakTimeCountdown.TextColor = LabelWorkTimeCountdown.TextColor;
                 }
